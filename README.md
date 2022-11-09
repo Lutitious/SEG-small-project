@@ -1,3 +1,4 @@
+# Epic 1
 ## Part 1
 1) Students can sign themselves up as (student) users of the system
 2) Once they have signed up, they can log in using their email and password
