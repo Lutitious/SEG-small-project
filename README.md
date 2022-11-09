@@ -4,7 +4,7 @@
 The members of the team are:
 - *Rahul Imran*
 - *Abdulaziz Albanawi*
-- *<name of team member 3>*
+- *<Anirudh George>*
 - *<name of team member 4>*
 - *<name of team member 5>*
 
