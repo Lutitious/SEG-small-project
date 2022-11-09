@@ -1,3 +1,5 @@
 coverage
 Django
 Faker
+gunicorn
+django-heroku
