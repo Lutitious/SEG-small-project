@@ -3,7 +3,7 @@
 ## Team members
 The members of the team are:
 - *Rahul Imran*
-- *<name of team member 2>*
+- *Abdulaziz Albanawi*
 - *<name of team member 3>*
 - *<name of team member 4>*
 - *<name of team member 5>*
