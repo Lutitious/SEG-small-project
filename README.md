@@ -2,7 +2,7 @@
 
 ## Team members
 The members of the team are:
-- *<name of team member 1>*
+- *Rahul Imran*
 - *<name of team member 2>*
 - *<name of team member 3>*
 - *<name of team member 4>*
