@@ -2,11 +2,8 @@ coverage
 Django
 Faker
 gunicorn
-django-heroku
 asgiref
 dj-database-url
-psycopg2
-psycopg2-binary
 pytz
 sqlparse
 whitenoise
