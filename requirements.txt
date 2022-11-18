@@ -2,7 +2,6 @@ coverage
 Django
 Faker
 gunicorn
-django-heroku
 asgiref
 dj-database-url
 psycopg2
