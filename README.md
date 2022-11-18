@@ -5,7 +5,7 @@ The members of the team are:
 - *Rahul Imran*
 - *Abdulaziz Albanawi*
 - *Anirudh George*
-- *<name of team member 4>*
+- *Mohammed Al Ibrahim*
 - *<name of team member 5>*
 
 ## Project structure
