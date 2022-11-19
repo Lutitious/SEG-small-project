@@ -11,6 +11,11 @@ class LogInTest(TestCase):
         response = self.client.get('/log_in/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'log_in.html')
+        form = response.context['form']
+        self.assertIsInstance(form, LogInForm)
+        self.assertContains(response, 'Username')
+        self.assertContains(response, 'Password')
+        self.assertFalse(form.is_bound)
 
     def test_form_contains_required_fields(self):
         form = LogInForm()
