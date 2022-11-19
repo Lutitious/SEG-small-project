@@ -6,7 +6,7 @@ The members of the team are:
 - *Abdulaziz Albanawi*
 - *Anirudh George*
 - *Mohammed Al Ibrahim*
-- *<name of team member 5>*
+- *Vishal Kumar*
 
 ## Project structure
 The project is called `msms` (Music School Management System).  It currently consists of a single app `lessons` where all functionality resides.
