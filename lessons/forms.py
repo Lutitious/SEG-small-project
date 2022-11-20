@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import RegexValidator
-from .models import User
+from .models import MusicStudentUser
 
 class LogInForm(forms.Form):
     username = forms.CharField(label='Username', max_length=50)

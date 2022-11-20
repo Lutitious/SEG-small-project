@@ -1,11 +1,25 @@
 from django.test import TestCase
 from django import forms
+from django.urls import reverse
+
 from lessons.forms import LogInForm
+from lessons.models import MusicStudentUser
+
+
 class LogInTest(TestCase):
+
+    def __init__(self, methodName: str = ...):
+        super().__init__(methodName)
+        self.url = '/log_in/'
 
     def setUp(self):
         self.form = LogInForm()
-        self.form_input = {'username': 'test', 'password': 'Password1'}
+        self.form_input = {'username': 'test', 'password': 'ThisIsATest1'}
+        MusicStudentUser.objects.create_user(username='test',
+                                 password='ThisIsATest1',
+                                 first_name='Test',
+                                 last_name='Test',
+                                 email="test@example.com")
 
     def test_log_in(self):
         response = self.client.get('/log_in/')
@@ -37,3 +51,23 @@ class LogInTest(TestCase):
         self.form_input['password'] = ''
         form = LogInForm(data=self.form_input)
         self.assertFalse(form.is_valid())
+
+    def test_unsuccessful_log_in(self):
+        form_input = {'username': 'test', 'password': 'IncorrectPassword'}
+        response = self.client.post(self.url, form_input)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'log_in.html')
+        form = response.context['form']
+        self.assertTrue(isinstance(form, LogInForm))
+        self.assertFalse(form.is_bound)
+
+    def test_successful_log_in(self):
+        form_input = {'username': 'test', 'password': 'ThisIsATest1'}
+        response = self.client.post(self.url, form_input, follow=True)
+        self.assertTrue(self._is_logged_in())
+        response_url = reverse('logged_in')
+        self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
+        self.assertTemplateUsed(response, 'logged_in.html')
+
+    def _is_logged_in(self):
+        return self.client.session.get('_auth_user_id') is not None
