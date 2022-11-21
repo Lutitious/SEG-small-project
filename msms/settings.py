@@ -132,4 +132,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_MUSIC_USER_MODEL = 'lessons.MusicStudentUser'
+AUTH_MUSIC_USER_MODEL = 'lessons.MusicBookingLesson'
