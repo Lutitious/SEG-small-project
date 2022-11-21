@@ -4,3 +4,4 @@ from django.db import models
 
 class MusicBookingLesson(models.Model):
     booking_date = models.DateField()
+    fulfilled_request = models.BooleanField(default=False)

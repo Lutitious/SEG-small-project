@@ -6,5 +6,5 @@ from .models import MusicBookingLesson
 class MusicBookingLessonAdmin(admin.ModelAdmin):
     """Configuration of admin interface for music students"""
     list_display = [
-        'booking_date',
+        'booking_date','fulfilled_request',
     ]
