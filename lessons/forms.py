@@ -1,10 +1,10 @@
 from django import forms
 from django.core.validators import RegexValidator
-from .models import User
+from .models import MusicStudentUser
 
 class SignUpForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = MusicStudentUser
         fields = ['first_name', 'last_name', 'username', 'email', 'bio']
         widgets = { 'bio': forms.Textarea() }
 
