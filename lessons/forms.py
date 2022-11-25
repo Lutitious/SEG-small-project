@@ -17,7 +17,7 @@ class SignUpForm(forms.ModelForm):
                     'character and a number'
         )]
     )
-    passowrd_confirmation = forms.CharField(label='Password confirmation', widget=forms.PasswordInput())
+    passowrd_confirmation = forms.CharField(label='Password_confirmation', widget=forms.PasswordInput())
 
     def clean(self):
         super().clean()
