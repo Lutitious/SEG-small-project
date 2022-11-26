@@ -1,8 +1,9 @@
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-from .models import MusicStudentUser
+from lessons.models import MusicStudentUser
 # Create your tests here.
 class MusicStudentUserModelTestCase(TestCase):
+    """Unit tests for this User Model"""
     def setUp(self):
         self.user = MusicStudentUser.objects.create_user(
         '@johndoe',
