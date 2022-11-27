@@ -167,6 +167,6 @@ class MusicStudentUserModelTestCase(TestCase):
         last_name='Doe',
         email='janedoe@example.org',
         password='Password123',
-        bio="I am a Grade 5 in Violin."
+        bio="I am a Grade 5 in Violin"
         )
         return user

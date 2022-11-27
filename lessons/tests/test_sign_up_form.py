@@ -14,7 +14,7 @@ class MusicStudentSignUpFormTestCase(TestCase):
         'last_name': 'Doe',
         'username': '@janedoe',
         'email': 'janedoe@example.org',
-        'bio': 'I am a Grade 5 in violin',
+        'bio': 'I am a Grade 5 in Violin',
         'new_password': 'Password123',
         'password_confirmation': 'Password123'
         }
