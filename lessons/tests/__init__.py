@@ -1,1 +1,1 @@
-from lessons.tests import test_log_in
+from lessons.tests import *

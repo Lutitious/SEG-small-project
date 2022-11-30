@@ -4,9 +4,10 @@ from django.urls import reverse
 
 from lessons.forms import LogInForm
 from lessons.models import MusicStudentUser
+from lessons.tests.helpers import LoginTester
 
 
-class LogInTest(TestCase):
+class LogInTest(TestCase, LoginTester):
 
     def __init__(self, methodName: str = ...):
         super().__init__(methodName)
@@ -69,5 +70,3 @@ class LogInTest(TestCase):
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
         self.assertTemplateUsed(response, 'logged_in.html')
 
-    def _is_logged_in(self):
-        return self.client.session.get('_auth_user_id') is not None
