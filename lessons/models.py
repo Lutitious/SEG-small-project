@@ -1,9 +1,28 @@
 from django.core.validators import RegexValidator
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.db import models
+
+class CustomUserManager(BaseUserManager):
+
+    def _create_user(self, username, email, first_name, last_name, password=None):
+        if not email:
+            raise ValueError('The email entered does not exist')
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name) 
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_user(self, username, email, first_name, last_name, password=None):
+        return self._create_user(username, email, first_name, last_name, password=None)
+
+    def create_superuser(self, username, email, first_name, last_name, password=None):
+        return self._create_user(username, email, first_name, last_name, password=None)
 
 
 class MusicStudentUser(AbstractUser):
+
     username = models.CharField(
         max_length=30,
         unique=True,

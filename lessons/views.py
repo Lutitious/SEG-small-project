@@ -3,11 +3,19 @@ from django.shortcuts import render, redirect
 from .forms import LogInForm
 from lessons.forms import LogInForm
 
+from django.shortcuts import render
+from .forms import SignUpForm
 
-# Create your views here.
 
 def index(request):
     return render(request, 'index.html')
+def sign_up(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+    else:
+        form = SignUpForm()
+    return render(request, 'sign_up.html', {'form': form})
+
 
 
 def logged_in(request):
