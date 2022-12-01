@@ -3,13 +3,14 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
+
 class CustomUserManager(BaseUserManager):
 
     def _create_user(self, username, email, first_name, last_name, password=None):
         if not email:
             raise ValueError('The email entered does not exist')
         email = self.normalize_email(email)
-        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name) 
+        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -20,9 +21,29 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, username, email, first_name, last_name, password=None):
         return self._create_user(username, email, first_name, last_name, password=None)
 
+class Enrolment(models.Model):
+    """Model for enrolment in a lesson."""
+    lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE)
+    student = models.ForeignKey('MusicStudentUser', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.lesson} - {self.student}'
+
+
+class Lesson(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    date = models.DateField()
+    time = models.TimeField()
+    duration = models.DurationField()
+    teacher = models.TextField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return self.title
+
 
 class MusicStudentUser(AbstractUser):
-
     username = models.CharField(
         max_length=30,
         unique=True,
@@ -77,3 +98,4 @@ class MusicStudentUser(AbstractUser):
             "max_length": "Bio cannot be more than 520 characters long.",
             "invalid": "Bio can only contain alphanumeric characters and the following special characters: !@#$%^&*()_+-=,./<>?;':\"[]{}|`~"
         })
+    lessons = models.ManyToManyField(Lesson, related_name='students')
