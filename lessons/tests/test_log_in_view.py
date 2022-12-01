@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django import forms
 from django.urls import reverse
+from django.contrib import messages
 
 from lessons.forms import LogInForm
 from lessons.models import MusicStudentUser
@@ -62,6 +63,9 @@ class LogInTest(TestCase, LoginTester):
         response = self.client.post(self.url, form_input)
         self.assertFalse(self._is_logged_in())
         self.assertTemplateUsed(response, 'log_in.html')
+        messages_list = list(response.context['messages'])
+        self.assertEqual(len(messages_list), 1)
+        self.assertEqual(messages_list[0].level, messages.ERROR)
 
     def test_successful_log_in(self):
         form_input = {'username': '@janedoe', 'password': 'Password123'}
@@ -70,6 +74,8 @@ class LogInTest(TestCase, LoginTester):
         response_url = reverse('logged_in')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
         self.assertTemplateUsed(response, 'logged_in.html')
+        messages_list = list(response.context['messages'])
+        self.assertEqual(len(messages_list), 0)
 
     def test_inactive_user_log_in(self):
         self.User.is_active = False
@@ -78,5 +84,6 @@ class LogInTest(TestCase, LoginTester):
         response = self.client.post(self.url, form_input)
         self.assertFalse(self._is_logged_in())
         self.assertTemplateUsed(response, 'log_in.html')
-
-
+        messages_list = list(response.context['messages'])
+        self.assertEqual(len(messages_list), 1)
+        self.assertEqual(messages_list[0].level, messages.ERROR)
