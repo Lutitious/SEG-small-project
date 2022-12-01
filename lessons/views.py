@@ -30,7 +30,7 @@ def logged_in(request):
     # Specify which lessons are available to the user using enrolments
     lesson_list = []
     for enrolment in Enrolment.objects.filter(student__username=request.user.username).all():
-        lesson_list.append(enrolment.lesson.__str__())
+        lesson_list.append('Lesson: ' + enrolment.lesson.__str__() + ' - Teacher: ' + enrolment.lesson.teacher.__str__() + ' - Date: ' + enrolment.lesson.date.__str__() + ' - Time: ' + enrolment.lesson.time.__str__() + ' - Duration: ' + enrolment.lesson.duration.__str__() + ' - Price: $' + enrolment.lesson.price.__str__())
     print(lesson_list)
     return render(request, 'logged_in.html', {'lesson_list': lesson_list})
 
