@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import LogInForm
+from .models import MusicStudentUser, Lesson, Enrolment
 from lessons.forms import LogInForm
 from django.contrib import messages
 from django.shortcuts import render
@@ -26,7 +27,12 @@ def sign_up(request):
 
 
 def logged_in(request):
-    return render(request, 'logged_in.html')
+    # Specify which lessons are available to the user using enrolments
+    lesson_list = []
+    for enrolment in Enrolment.objects.filter(student__username=request.user.username).all():
+        lesson_list.append(enrolment.lesson.__str__())
+    print(lesson_list)
+    return render(request, 'logged_in.html', {'lesson_list': lesson_list})
 
 
 def log_in(request):

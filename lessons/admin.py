@@ -1,6 +1,6 @@
 """Configuration of the adminstration interface for microblogs."""
 from django.contrib import admin
-from .models import MusicStudentUser, Lesson
+from .models import MusicStudentUser, Lesson, Enrolment
 
 
 @admin.register(MusicStudentUser)
@@ -32,4 +32,16 @@ class LessonAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': ('title', 'description', 'date', 'time', 'duration', 'price', 'teacher')}),)
     add_fieldsets = (
     (None, {'classes': ('wide',), 'fields': ('title', 'description', 'date', 'time', 'duration', 'price', 'teacher')}),)
+    filter_horizontal = ()
+
+@admin.register(Enrolment)
+class EnrolmentAdmin(admin.ModelAdmin):
+    """Configuration of the admin interface for enrolment."""
+
+    list_display = ['lesson', 'student']
+    list_filter = ['lesson', 'student']
+    search_fields = ['lesson', 'student']
+    ordering = ['lesson']
+    fieldsets = ((None, {'fields': ('lesson', 'student')}),)
+    add_fieldsets = ((None, {'classes': ('wide',), 'fields': ('lesson', 'student')}),)
     filter_horizontal = ()

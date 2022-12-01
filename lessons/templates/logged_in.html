@@ -7,6 +7,15 @@
 <body>
 <!--Specify which user is logged in from the django project-->
     Log In Successful, you are now logged in as {{ user.username }}
+
+<!--Output the lesson list-->
+    <h1>Lessons</h1>
+    <ul>
+        {% for lesson in lesson_list %}
+            <li>{{ lesson }}</li>
+        {% endfor %}
+    </ul>
+
 <!--Add a button to logout the user-->
     <form action="{% url 'log_out' %}" method="post">
         {% csrf_token %}
