@@ -10,13 +10,13 @@ class MusicStudentSignUpFormTestCase(TestCase):
 
     def setUp(self):
         self.form_input = {
-        'first_name': 'Jane',
-        'last_name': 'Doe',
-        'username': '@janedoe',
-        'email': 'janedoe@example.org',
-        'bio': 'I am a Grade 5 in Violin',
-        'new_password': 'Password123',
-        'password_confirmation': 'Password123'
+            'first_name': 'Jane',
+            'last_name': 'Doe',
+            'username': '@janedoe',
+            'email': 'janedoe@example.org',
+            'bio': 'I am a Grade 5 in Violin',
+            'new_password': 'Password123',
+            'password_confirmation': 'Password123'
         }
 
     def test_valid_sign_up_form(self):

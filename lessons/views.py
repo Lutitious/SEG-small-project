@@ -33,8 +33,7 @@ def log_in(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('logged_in')
+            login(request, user)
+            return redirect('logged_in')
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
