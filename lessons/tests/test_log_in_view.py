@@ -14,13 +14,16 @@ class LogInTest(TestCase, LoginTester):
         self.url = '/log_in/'
 
     def setUp(self):
-        self.form = LogInForm()
-        self.form_input = {'username': 'test', 'password': 'ThisIsATest1'}
-        MusicStudentUser.objects.create_user(username='test',
-                                 password='ThisIsATest1',
-                                 first_name='Test',
-                                 last_name='Test',
-                                 email="test@example.com")
+        self.url = reverse('log_in')
+        self.form_input = {
+            'first_name': 'Jane',
+            'last_name': 'Doe',
+            'username': '@janedoe',
+            'email': 'janedoe@example.org',
+            'bio': 'I am a Grade 5 in Violin',
+            'password': 'Password123',
+        }
+        MusicStudentUser.objects.create_user(**self.form_input)
 
     def test_log_in(self):
         response = self.client.get('/log_in/')
@@ -63,7 +66,7 @@ class LogInTest(TestCase, LoginTester):
         self.assertFalse(form.is_bound)
 
     def test_successful_log_in(self):
-        form_input = {'username': 'test', 'password': 'ThisIsATest1'}
+        form_input = {'username': '@janedoe', 'password': 'Password123'}
         response = self.client.post(self.url, form_input, follow=True)
         self.assertTrue(self._is_logged_in())
         response_url = reverse('logged_in')
