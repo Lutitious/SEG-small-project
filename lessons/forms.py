@@ -31,3 +31,10 @@ class SignUpForm(forms.ModelForm):
         password_confirmation = self.cleaned_data.get('password_confirmation')
         if new_password != password_confirmation:
             self.add_error('password_confirmation', 'Confirmation does not march password.')
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['new_password'])
+        if commit:
+            user.save()
+        return user
