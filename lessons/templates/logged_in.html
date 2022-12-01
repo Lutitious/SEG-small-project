@@ -7,5 +7,10 @@
 <body>
 <!--Specify which user is logged in from the django project-->
     Log In Successful, you are now logged in as {{ user.username }}
+<!--Add a button to logout the user-->
+    <form action="{% url 'log_out' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
 </body>
 </html>

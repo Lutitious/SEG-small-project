@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import LogInForm
 from lessons.forms import LogInForm
@@ -9,6 +9,8 @@ from .forms import SignUpForm
 
 def index(request):
     return render(request, 'index.html')
+
+
 def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -21,7 +23,6 @@ def sign_up(request):
     else:
         form = SignUpForm()
     return render(request, 'sign_up.html', {'form': form})
-
 
 
 def logged_in(request):
@@ -42,3 +43,8 @@ def log_in(request):
                 messages.add_message(request, messages.ERROR, 'Invalid username or password')
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
+
+
+def log_out(request):
+    logout(request)
+    return redirect('index')
