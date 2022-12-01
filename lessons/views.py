@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .forms import LogInForm
 from lessons.forms import LogInForm
-
+from django.contrib import messages
 from django.shortcuts import render
 from .forms import SignUpForm
 
@@ -16,6 +16,8 @@ def sign_up(request):
             user = form.save()
             login(request, user)
             return redirect('logged_in')
+        else:
+            messages.add_message(request, messages.ERROR, 'sign up failed')
     else:
         form = SignUpForm()
     return render(request, 'sign_up.html', {'form': form})
@@ -37,9 +39,6 @@ def log_in(request):
                 login(request, user)
                 return redirect('logged_in')
             else:
-                return redirect('failed_login')
+                messages.add_message(request, messages.ERROR, 'Invalid username or password')
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
-
-def failed_login(request):
-    return render(request, 'failed_login.html')

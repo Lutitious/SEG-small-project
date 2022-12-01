@@ -22,8 +22,9 @@ class LogInTest(TestCase, LoginTester):
             'email': 'janedoe@example.org',
             'bio': 'I am a Grade 5 in Violin',
             'password': 'Password123',
+            'is_active': True,
         }
-        MusicStudentUser.objects.create_user(**self.form_input)
+        self.User = MusicStudentUser.objects.create_user(**self.form_input)
 
     def test_log_in(self):
         response = self.client.get('/log_in/')
@@ -57,13 +58,10 @@ class LogInTest(TestCase, LoginTester):
         self.assertFalse(form.is_valid())
 
     def test_unsuccessful_log_in(self):
-        form_input = {'username': 'test', 'password': 'IncorrectPassword'}
+        form_input = {'username': '@janedoe', 'password': 'IncorrectPassword'}
         response = self.client.post(self.url, form_input)
-        self.assertEqual(response.status_code, 200)
+        self.assertFalse(self._is_logged_in())
         self.assertTemplateUsed(response, 'log_in.html')
-        form = response.context['form']
-        self.assertTrue(isinstance(form, LogInForm))
-        self.assertFalse(form.is_bound)
 
     def test_successful_log_in(self):
         form_input = {'username': '@janedoe', 'password': 'Password123'}
@@ -72,4 +70,13 @@ class LogInTest(TestCase, LoginTester):
         response_url = reverse('logged_in')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
         self.assertTemplateUsed(response, 'logged_in.html')
+
+    def test_inactive_user_log_in(self):
+        self.User.is_active = False
+        self.User.save()
+        form_input = {'username': '@janedoe', 'password': 'Password123'}
+        response = self.client.post(self.url, form_input)
+        self.assertFalse(self._is_logged_in())
+        self.assertTemplateUsed(response, 'log_in.html')
+
 

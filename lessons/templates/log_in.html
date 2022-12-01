@@ -10,6 +10,9 @@
 
 <form action="{% url 'log_in' %}" method="post">
     {% csrf_token %}
+    {% for message in messages %}
+        <p><b>{{ message }}</b></p>
+    {% endfor %}
 <table>
         <tr>
             <td>Username:</td>
