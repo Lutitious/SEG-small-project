@@ -32,8 +32,14 @@ def log_in(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            login(request, user)
-            return redirect('logged_in')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('logged_in')
+            else:
+                return redirect('failed_login')
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
+
+def failed_login(request):
+    return render(request, 'failed_login.html')

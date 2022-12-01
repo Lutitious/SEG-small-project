@@ -77,3 +77,4 @@ class MusicStudentUser(AbstractUser):
             "max_length": "Bio cannot be more than 520 characters long.",
             "invalid": "Bio can only contain alphanumeric characters and the following special characters: !@#$%^&*()_+-=,./<>?;':\"[]{}|`~"
         })
+
