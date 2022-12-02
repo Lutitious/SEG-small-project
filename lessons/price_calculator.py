@@ -1,26 +1,26 @@
 class CalculatePrice:
 
-    costPerHour = 35.0
+    costPerFifteenMin = 8.75
     permanentDiscount = 1.0
     rentedInstrumentCost = 2
 
-    def __init__(self, hours, rentedInstrument, groupLesson):
-        self.hours = hours
+    def __init__(self, Fifteen, rentedInstrument, groupLesson):
+        self.Fifteen = Fifteen
         self.rentedInstrument = rentedInstrument
         self.groupLesson = groupLesson
 
     def calculatePrice(self):
         rentedInstrumentSum = 0
         if self.rentedInstrument:
-            rentedInstrumentSum += self.hours * self.rentedInstrumentCost
+            rentedInstrumentSum += self.Fifteen * self.rentedInstrumentCost
         groupLessonDiscount = 1
         if self.groupLesson:
             groupLessonDiscount = 0.7
-        return (self.costPerHour * self.hours * groupLessonDiscount) + rentedInstrumentSum
+        return (self.costPerFifteenMin * self.Fifteen * groupLessonDiscount) + rentedInstrumentSum
 
     @staticmethod
-    def setCostPerHour(costPerHour):
-        CalculatePrice.costPerHour = costPerHour
+    def setCostPerFifteenMin(costPerFifteenMin):
+        CalculatePrice.costPerFifteenMin = costPerFifteenMin
 
     @staticmethod
     def setPermanentDiscount(permanentDiscount):
