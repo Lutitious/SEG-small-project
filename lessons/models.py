@@ -20,8 +20,9 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, username, email, first_name, last_name, password=None):
         return self._create_user(username, email, first_name, last_name, password=None)
 
-
 class MusicStudentUser(AbstractUser):
+
+    student_id = models.AutoField(primary_key=True)
 
     username = models.CharField(
         max_length=30,
