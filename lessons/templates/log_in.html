@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+</head>
+<body>
+
+<h1>Log In</h1>
+
+<form action="{% url 'log_in' %}" method="post">
+    {% csrf_token %}
+    {% for message in messages %}
+        <p><b>{{ message }}</b></p>
+    {% endfor %}
+<table>
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" name="username" value="{{ username }}"></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" name="password" value="{{ password }}"></td>
+        </tr>
+        <tr>
+
+            <td> </td>
+            <td><input type="submit" value="Log In" ></td>
+        </tr>
+</table>
+</form>
+
+</body>
+</html>
