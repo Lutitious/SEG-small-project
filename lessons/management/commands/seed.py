@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
 from ...models import MusicStudentUser, Lesson, Enrolment
 from faker import Faker
+
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         # Use faker to create fake data
