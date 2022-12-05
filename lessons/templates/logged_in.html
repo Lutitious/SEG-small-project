@@ -9,12 +9,29 @@
     Log In Successful, you are now logged in as {{ user.username }}
 
 <!--Output the lesson list-->
-    <h1>Lessons</h1>
-    <ul>
-        {% for lesson in lesson_list %}
-            <li>{{ lesson }}</li>
-        {% endfor %}
-    </ul>
+    <br>
+    <button id="view_lessons">View Lessons</button>
+    <button id="hide_lessons" style="display: none">Hide Lessons</button>
+    <script>
+        document.getElementById("view_lessons").onclick = function() {
+            document.getElementById("lessons").style.display = "block";
+            document.getElementById("view_lessons").style.display = "none";
+            document.getElementById("hide_lessons").style.display = "block";
+        };
+        document.getElementById("hide_lessons").onclick = function() {
+            document.getElementById("lessons").style.display = "none";
+            document.getElementById("view_lessons").style.display = "block";
+            document.getElementById("hide_lessons").style.display = "none";
+        };
+    </script>
+    <div id="lessons" style="display: none">
+        <h1>Lessons</h1>
+        <ul>
+            {% for lesson in lesson_list %}
+                <li>{{ lesson }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
 <!--Add a button to logout the user-->
     <form action="{% url 'log_out' %}" method="post">
