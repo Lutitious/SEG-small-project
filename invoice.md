@@ -1,8 +1,8 @@
 # INVOICE
 
-                                                                                                               Invoice Number: (student reference number + 00X)
-                                                                                                               Invoice date: (date of booking)
-                                                                                                               Due date: (month after booking)
+                                                                                                         Invoice Number: (student reference number + 00X)
+                                                                                                         Invoice date: (date of booking)
+                                                                                                         Due date: (month after booking)
 
 | Description | Price |
 | ----------- | ----------- |
