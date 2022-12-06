@@ -1,11 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import LogInForm
 from .models import MusicStudentUser, Lesson, Enrolment
-from lessons.forms import LogInForm
+from lessons.forms import LogInForm, SignUpForm, RequestBookingForm
 from django.contrib import messages
 from django.shortcuts import render
-from .forms import SignUpForm
 
 
 def index(request):
@@ -54,3 +52,16 @@ def log_in(request):
 def log_out(request):
     logout(request)
     return redirect('index')
+
+def request_booking(request):
+    if request.method == 'POST':
+        form = RequestBookingForm(request.POST)
+        if form.is_valid():
+            Enrolment = form.save(commit=False)
+            Enrolment.student = request.user
+            Enrolment.save()
+            return render(request, "booking_confirmation.html", {'lesson': Enrolment.lesson, 'student': request.user})
+        else:
+            form = RequestBookingForm()
+        return render(request, 'request_booking.html', {'form': form})
+

@@ -15,7 +15,11 @@
             <li>{{ lesson }}</li>
         {% endfor %}
     </ul>
-
+<!--Add a button to make a booking request-->
+    <form action = "{% url 'request_booking' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Request booking">
+    </form>
 <!--Add a button to logout the user-->
     <form action="{% url 'log_out' %}" method="post">
         {% csrf_token %}
