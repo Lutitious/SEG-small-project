@@ -1,30 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
     <title>Logged In</title>
 </head>
 <body>
-<!--Specify which user is logged in from the django project-->
-    Log In Successful, you are now logged in as {{ user.username }}
 
 <!--Output the lesson list-->
     <br>
-    <button id="view_lessons">View Lessons</button>
-    <button id="hide_lessons" style="display: none">Hide Lessons</button>
-    <script>
-        document.getElementById("view_lessons").onclick = function() {
-            document.getElementById("lessons").style.display = "block";
-            document.getElementById("view_lessons").style.display = "none";
-            document.getElementById("hide_lessons").style.display = "block";
-        };
-        document.getElementById("hide_lessons").onclick = function() {
-            document.getElementById("lessons").style.display = "none";
-            document.getElementById("view_lessons").style.display = "block";
-            document.getElementById("hide_lessons").style.display = "none";
-        };
-    </script>
-    <div id="lessons" style="display: none">
+
+    <div id="lessons" class="field-list">
         <h1>Lessons</h1>
         <ul>
             {% for lesson in lesson_list %}
@@ -32,15 +23,5 @@
             {% endfor %}
         </ul>
     </div>
-<!--Add a button to make a booking request-->
-    <form action = "{% url 'request_booking' %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Request booking">
-    </form>
-<!--Add a button to logout the user-->
-    <form action="{% url 'log_out' %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Logout">
-    </form>
 </body>
 </html>
