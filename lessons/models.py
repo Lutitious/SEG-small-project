@@ -22,6 +22,15 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, username, email, first_name, last_name, password=None):
         return self._create_user(username, email, first_name, last_name, password=None)
 
+
+class Request(models.Model):
+    lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE)
+    student = models.ForeignKey('MusicStudentUser', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.lesson} - {self.student}'
+
+
 class Enrolment(models.Model):
     """Model for enrolment in a lesson."""
     lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE)
