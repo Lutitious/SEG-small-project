@@ -5,6 +5,7 @@ class priceTest(TestCase):
 
     def setUp(self):
         CalculatePrice.setCostPerHour(8.75)
+        CalculatePrice.setCostPerFifteenMin(8.75)
         CalculatePrice.setPermanentDiscount(1)
         CalculatePrice.setRentedInstrumentCost(2)
 
@@ -19,12 +20,16 @@ class priceTest(TestCase):
     def test_fifteen_min_group_lesson_with_rented_instrument(self):
         cost = CalculatePrice(1, True, True).calculatePrice()
         self.assertEqual(cost, 8.125)
-
+        
+    def test_fifteen_min_group_lesson_cost_6_and_a_half(self):
+        CalculatePrice.setCostPerFifteenMin(6.5)
+        cost = CalculatePrice(1, False, True).calculatePrice()
+        self.assertEqual(cost, 4.55)
 
     def test_half_hour_group_lesson(self):
         cost = CalculatePrice(2, False, True).calculatePrice()
         self.assertEqual(cost, 12.25)
-
+        
     def test_half_hour_group_lesson_cost_30(self):
         CalculatePrice.setCostPerFifteenMin(30)
         cost = CalculatePrice(2, False, True).calculatePrice()
@@ -38,7 +43,7 @@ class priceTest(TestCase):
     def test_forty_five_min_group_lesson(self):
         cost = CalculatePrice(3, False, True).calculatePrice()
         self.assertEqual(cost, 18.375)
-
+        
     def test_forty_five_min_group_lesson_cost_7_and_a_half(self):
         CalculatePrice.setCostPerFifteenMin(7.5)
         cost = CalculatePrice(3, False, True).calculatePrice()
@@ -52,7 +57,7 @@ class priceTest(TestCase):
     def test_one_hour_group_lesson(self):
         cost = CalculatePrice(4, False, True).calculatePrice()
         self.assertEqual(cost, 24.5)
-
+        
     def test_one_hour_group_lesson_cost_7_and_a_half(self):
         CalculatePrice.setCostPerFifteenMin(7.5)
         cost = CalculatePrice(4, False, True).calculatePrice()
