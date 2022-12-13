@@ -1,6 +1,6 @@
 """Configuration of the adminstration interface for microblogs."""
 from django.contrib import admin
-from .models import MusicStudentUser, Lesson, Enrolment
+from .models import MusicStudentUser, Lesson, Enrolment, bookingRequest
 
 
 @admin.register(MusicStudentUser)
@@ -31,8 +31,10 @@ class LessonAdmin(admin.ModelAdmin):
     ordering = ['title']
     fieldsets = ((None, {'fields': ('title', 'description', 'date', 'time', 'duration', 'price', 'teacher')}),)
     add_fieldsets = (
-    (None, {'classes': ('wide',), 'fields': ('title', 'description', 'date', 'time', 'duration', 'price', 'teacher')}),)
+        (None,
+         {'classes': ('wide',), 'fields': ('title', 'description', 'date', 'time', 'duration', 'price', 'teacher')}),)
     filter_horizontal = ()
+
 
 @admin.register(Enrolment)
 class EnrolmentAdmin(admin.ModelAdmin):
@@ -44,4 +46,17 @@ class EnrolmentAdmin(admin.ModelAdmin):
     ordering = ['lesson']
     fieldsets = ((None, {'fields': ('lesson', 'student')}),)
     add_fieldsets = ((None, {'classes': ('wide',), 'fields': ('lesson', 'student')}),)
+    filter_horizontal = ()
+
+
+@admin.register(bookingRequest)
+class bookingRequestAdmin(admin.ModelAdmin):
+    """Configuration of the admin interface for requests."""
+
+    list_display = ['lesson', 'student', 'denied']
+    list_filter = ['lesson', 'student', 'denied']
+    search_fields = ['lesson', 'student']
+    ordering = ['lesson']
+    fieldsets = ((None, {'fields': ('lesson', 'student', 'denied')}),)
+    add_fieldsets = ((None, {'classes': ('wide',), 'fields': ('lesson', 'student', 'denied')}),)
     filter_horizontal = ()
