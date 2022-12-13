@@ -6,7 +6,7 @@ class priceTest(TestCase):
     def setUp(self):
         CalculatePrice.setCostPerFifteenMin(8.75)
         CalculatePrice.setPermanentDiscount(1)
-        CalculatePrice.setRentedInstrumentCost(2)
+        CalculatePrice.setRentedInstrumentCost(2) #Added to original price
 
     def test_fifteen_min_lesson(self):
         cost = CalculatePrice(1, False, False).calculatePrice()
