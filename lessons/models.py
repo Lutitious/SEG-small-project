@@ -1,8 +1,13 @@
+import random
+
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from datetime import date
+from dateutil.relativedelta import relativedelta
+import uuid
 
 
 class CustomUserManager(BaseUserManager):
@@ -41,6 +46,8 @@ class Enrolment(models.Model):
         return f'{self.lesson} - {self.student}'
 
 
+
+
 class Lesson(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -53,6 +60,16 @@ class Lesson(models.Model):
     def __str__(self):
         return self.title
 
+class Invoice(models.Model):
+
+    """Model for invoice"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    date = date.today()
+    due_date = date.today() + relativedelta(months=+1)
+    lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.date}  |  {self.due_date}  |  {self.lesson.__str__()}  |  {self.lesson.name}'
 
 class MusicStudentUser(AbstractUser):
     username = models.CharField(
