@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib import messages
 
 from lessons.forms import LogInForm, RequestBookingForm
-from lessons.models import MusicStudentUser, Request
+from lessons.models import MusicStudentUser, bookingRequest
 from lessons.tests.helpers import LoginTester
 
 
@@ -45,4 +45,4 @@ def test_request_shows_in_admin(self):
     response = self.client.get('/admin/lessons/request/')
     self.assertEqual(response.status_code, 200)
     self.assertTemplateUsed(response, 'admin/change_list.html')
-    self.assertContains(response, 'Requests')
+    self.assertContains(response, 'bookingRequests')

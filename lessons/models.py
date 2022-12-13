@@ -23,9 +23,10 @@ class CustomUserManager(BaseUserManager):
         return self._create_user(username, email, first_name, last_name, password=None)
 
 
-class Request(models.Model):
+class bookingRequest(models.Model):
     lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE)
     student = models.ForeignKey('MusicStudentUser', on_delete=models.CASCADE)
+    denied = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.lesson} - {self.student}'

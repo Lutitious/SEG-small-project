@@ -1,6 +1,6 @@
 """Configuration of the adminstration interface for microblogs."""
 from django.contrib import admin
-from .models import MusicStudentUser, Lesson, Enrolment, Request
+from .models import MusicStudentUser, Lesson, Enrolment, bookingRequest
 
 
 @admin.register(MusicStudentUser)
@@ -49,14 +49,14 @@ class EnrolmentAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
 
-@admin.register(Request)
-class RequestAdmin(admin.ModelAdmin):
+@admin.register(bookingRequest)
+class bookingRequestAdmin(admin.ModelAdmin):
     """Configuration of the admin interface for requests."""
 
-    list_display = ['lesson', 'student']
-    list_filter = ['lesson', 'student']
+    list_display = ['lesson', 'student', 'denied']
+    list_filter = ['lesson', 'student', 'denied']
     search_fields = ['lesson', 'student']
     ordering = ['lesson']
-    fieldsets = ((None, {'fields': ('lesson', 'student')}),)
-    add_fieldsets = ((None, {'classes': ('wide',), 'fields': ('lesson', 'student')}),)
+    fieldsets = ((None, {'fields': ('lesson', 'student', 'denied')}),)
+    add_fieldsets = ((None, {'classes': ('wide',), 'fields': ('lesson', 'student', 'denied')}),)
     filter_horizontal = ()
