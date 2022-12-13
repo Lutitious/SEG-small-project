@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .models import MusicStudentUser, Lesson, Request, Enrolment
+from .models import MusicStudentUser, Lesson, bookingRequest, Enrolment
 from lessons.forms import LogInForm, SignUpForm, RequestBookingForm
 from django.contrib import messages
 from django.shortcuts import render
@@ -61,7 +61,20 @@ def request_booking(request):
         Request = form.save(commit=False)
         Request.student = request.user
         Request.save()
-        return render(request, 'main.html', context={"name": 'booking_confirmation.html','lesson': request, 'student': request.user})
+        return render(request, 'main.html', context={"name": 'booking_confirmation.html', 'form': form})
     else:
         form = RequestBookingForm()
     return render(request, 'main.html', context={"name": 'request_booking.html', 'form': form})
+
+
+def view_requests(request):
+    request_list = []
+    for enrolment in bookingRequest.objects.filter(student__username=request.user.username).all():
+        if enrolment.denied.__str__() == "False":
+            deniedStr = "Pending"
+        else:
+            deniedStr = "Denied"
+        request_list.append(
+            'Lesson: ' + enrolment.lesson.__str__() + ' - Teacher: ' + enrolment.lesson.teacher.__str__() + ' - Date: ' + enrolment.lesson.date.__str__() + ' - Time: ' + enrolment.lesson.time.__str__() + ' - Duration: ' + enrolment.lesson.duration.__str__() + ' - Price: $' + enrolment.lesson.price.__str__() + ' - Status: ' + deniedStr)
+    print(request_list)
+    return render(request, 'main.html', context={"name": 'view_requests.html', 'request_list': request_list})
