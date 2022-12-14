@@ -1,4 +1,4 @@
-"""Configuration of the adminstration interface for microblogs."""
+"""Configuration of the adminstration interface for booking music lessons."""
 from django.contrib import admin
 from .models import MusicStudentUser, Lesson, Enrolment, bookingRequest
 
