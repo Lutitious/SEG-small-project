@@ -51,4 +51,4 @@ $ python3 manage.py test
 The packages used by this application are specified in `requirements.txt`
 
 *Declare our other sources here.*
-test_sign_up and test_user_model unit tests are reused from the Clucker application.
+All of the tests in test_sign_up_form.py, test_sign_up_view.py and test_user_model.py unit tests are reused from the Clucker application.

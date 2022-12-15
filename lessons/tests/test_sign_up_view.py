@@ -33,7 +33,7 @@ class SignUpViewTestCase(TestCase, LoginTester):
         self.assertTrue(isinstance(form, SignUpForm))
         self.assertFalse(form.is_bound)
 
-    def test_unsuccesful_sign_up(self):
+    def test_unsuccessful_sign_up(self):
         self.form_input['username'] = "bad_username"
         before_count = MusicStudentUser.objects.count()
         response = self.client.post(self.url, self.form_input)
